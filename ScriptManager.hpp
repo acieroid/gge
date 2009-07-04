@@ -2,6 +2,7 @@
 #define GGE_SCRIPTMANAGER_HPP
 
 #include <libguile.h>
+#include "LogManager.hpp"
 
 class ScriptManager {
   private:
@@ -12,9 +13,12 @@ class ScriptManager {
       return &instance;
     }
   public:
+		/* Initialize guile */
+		static void initGuile();
+
     /* Load a script */
     static void loadScript(const char *script); 
-    static SCM load_script(SCM script);
+    static SCM scm_load_script(SCM script);
 };
 
 #endif

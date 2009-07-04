@@ -3,8 +3,11 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <libguile.h>
+#include "ScriptManager.hpp"
 
 class LogManager {
+	friend class ScriptManager;
 	private:
 		LogManager(); 
 
@@ -12,6 +15,8 @@ class LogManager {
       static LogManager instance;
       return &instance;
     }
+
+		static void initGuileFunctions();
 
 		int m_iOutputMode;
 		std::string m_sOutputFile;
@@ -26,5 +31,6 @@ class LogManager {
 		static void setOutputFile(std::string path);
 
 		static void log(std::string what);
+		static SCM scm_log(SCM what);
 };
 #endif
