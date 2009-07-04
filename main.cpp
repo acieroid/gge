@@ -1,6 +1,7 @@
 #include <boost/program_options.hpp>
 #include <iostream>
 #include <vector>
+#include "ScriptManager.hpp"
 
 int main(int argc, char **argv) {
   boost::program_options::options_description desc("Options");
@@ -45,6 +46,9 @@ int main(int argc, char **argv) {
         std::cout << *I << " ";
     }
     std::cout << std::endl;
+    
+    ScriptManager::loadScript(vm["script"].as<std::string>().c_str());
+    
   }
 }
 
