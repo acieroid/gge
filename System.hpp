@@ -6,6 +6,7 @@
 #include <libguile.h>
 
 class System {
+  friend class ScriptManager;
   private:
     /* Arguments passed to the script */
     std::vector<std::string> m_vArgs;
@@ -17,12 +18,15 @@ class System {
       return &instance;
     }
 
+    static void initGuileFunctions();
+
   public:
-    /* Set the m_vArgs variable */
     void setScriptArguments(std::vector<std::string> args);
 
     /* Get the arguments in a list */
-    static SCM get_args();
+    static SCM scm_get_args();
+    /* Quit GGE */
+    static SCM scm_quit();
 };
 
 #endif
