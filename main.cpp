@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "ScriptManager.hpp"
+#include "LogManager.hpp"
 
 int main(int argc, char **argv) {
   boost::program_options::options_description desc("Options");
@@ -47,8 +48,10 @@ int main(int argc, char **argv) {
     }
     std::cout << std::endl;
     
-    ScriptManager::loadScript(vm["script"].as<std::string>().c_str());
+		LogManager::setOutputMode(LogManager::OUTPUT_FILE | LogManager::OUTPUT_STDERR);
+		ScriptManager::initGuile();
     
+    ScriptManager::loadScript(vm["script"].as<std::string>().c_str());
   }
 }
 
