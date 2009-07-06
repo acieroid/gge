@@ -12,14 +12,14 @@ void ScriptManager::initGuile() {
 	get();
 
 	LogManager::initGuileFunctions();
+  System::initGuileFunctions();
 }
 
 void ScriptManager::loadScript(const char *script) {
   LogManager::log("Loading script: " + std::string(script));
-	//TODO: convert to string
   scm_c_primitive_load(script);
 } 
 
 SCM ScriptManager::scm_load_script(SCM script) {
-  ScriptManager::loadScript((const char*) script);
+  ScriptManager::loadScript(scm_to_locale_string(script));
 }

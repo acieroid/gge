@@ -37,5 +37,5 @@ void LogManager::log(std::string what) {
 }
 
 SCM LogManager::scm_log(SCM what) {
-	LogManager::log((const char *) what);
+	LogManager::log(scm_to_locale_string(what));
 }

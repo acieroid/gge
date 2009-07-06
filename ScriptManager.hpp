@@ -3,6 +3,7 @@
 
 #include <libguile.h>
 #include "LogManager.hpp"
+#include "System.hpp"
 
 class ScriptManager {
   private:
