@@ -4,6 +4,7 @@
 #include <libguile.h>
 #include "LogManager.hpp"
 #include "System.hpp"
+#include "Display.hpp"
 
 class ScriptManager {
   private:

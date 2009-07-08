@@ -11,8 +11,13 @@ void ScriptManager::initGuile() {
 	/* This just call the constructor */
 	get();
 
+  /* TODO: one virtual class from which all these
+     classes derives. ScriptManager::regiterClass(foo)
+     add a class to the class list, and initialize this
+     list here */
 	LogManager::initGuileFunctions();
   System::initGuileFunctions();
+  Display::initGuileFunctions();
 }
 
 void ScriptManager::loadScript(const char *script) {

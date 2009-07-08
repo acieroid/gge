@@ -38,7 +38,8 @@ int main(int argc, char **argv) {
   }
   else {
 		LogManager::setOutputMode(LogManager::OUTPUT_FILE | LogManager::OUTPUT_STDERR);
-    System::setScriptArguments(vm["args"].as<std::vector<std::string> >());
+    if (vm.count("args"))
+      System::setScriptArguments(vm["args"].as<std::vector<std::string> >());
     
 		ScriptManager::initGuile();
     ScriptManager::loadScript(vm["script"].as<std::string>().c_str());
