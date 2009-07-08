@@ -1,27 +1,23 @@
 #include "ScriptManager.hpp"
 
-ScriptManager::ScriptManager() {
-  LogManager::log("Guile initialization");
+void ScriptManager::initGuile() {
+  //LogManager::log("Guile initialization");
   scm_init_guile();
   scm_c_define_gsubr("load-script", 1, 0, 0, (SCM (*)()) scm_load_script);
 
+
+  for (std::vector<GGEElement *>::iterator I = get()->m_vElements.begin(), 
+       E = get()->m_vElements.end(); I != E; I++) {
+    (*I)->initGuile();
+  }
 }
 
-void ScriptManager::initGuile() {
-	/* This just call the constructor */
-	get();
-
-  /* TODO: one virtual class from which all these
-     classes derives. ScriptManager::regiterClass(foo)
-     add a class to the class list, and initialize this
-     list here */
-	LogManager::initGuileFunctions();
-  System::initGuileFunctions();
-  Display::initGuileFunctions();
+void ScriptManager::registerElement(GGEElement *e) {
+  get()->m_vElements.push_back(e);
 }
 
 void ScriptManager::loadScript(const char *script) {
-  LogManager::log("Loading script: " + std::string(script));
+  //LogManager::log("Loading script: " + std::string(script));
   scm_c_primitive_load(script);
 } 
 

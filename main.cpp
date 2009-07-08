@@ -3,6 +3,8 @@
 #include <vector>
 #include "ScriptManager.hpp"
 #include "LogManager.hpp"
+#include "System.hpp"
+#include "Display.hpp"
 
 int main(int argc, char **argv) {
   boost::program_options::options_description desc("Options");
@@ -41,6 +43,9 @@ int main(int argc, char **argv) {
     if (vm.count("args"))
       System::setScriptArguments(vm["args"].as<std::vector<std::string> >());
     
+    ScriptManager::registerElement(LogManager::get());
+    ScriptManager::registerElement(System::get());
+    ScriptManager::registerElement(Display::get());
 		ScriptManager::initGuile();
     ScriptManager::loadScript(vm["script"].as<std::string>().c_str());
   }

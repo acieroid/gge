@@ -5,7 +5,7 @@ LogManager::LogManager() {
 	m_sOutputFile = "log.txt";
 }
 
-void LogManager::initGuileFunctions() {
+void LogManager::initGuile() {
 	scm_c_define_gsubr("log", 1, 0, 0, (SCM (*)()) scm_log);
 }
 

@@ -1,26 +1,25 @@
 #ifndef GGE_SYSTEM_HPP
 #define GGE_SYSTEM_HPP
 
+#include "GGEElement.hpp"
 #include <vector>
 #include <string>
 #include <libguile.h>
 
-class System {
-  friend class ScriptManager;
+class System : public GGEElement {
   private:
     /* Arguments passed to the script */
     std::vector<std::string> m_vArgs;
     
     System() {}
+    void initGuile();
 
+  public:
     static System* get() {
       static System instance;
       return &instance;
     }
 
-    static void initGuileFunctions();
-
-  public:
     static void setScriptArguments(std::vector<std::string> args);
 
     /* Get the arguments in a list */

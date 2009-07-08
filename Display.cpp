@@ -3,7 +3,8 @@
 Display::Display() {
   m_pScreen = NULL;
 }
-void Display::initGuileFunctions() {
+
+void Display::initGuile() {
   scm_c_define_gsubr("init-graphics", 1, 0, 0, (SCM (*)()) scm_init_graphics);
   scm_c_define_gsubr("quit-graphics", 0, 0, 0, (SCM (*)()) scm_quit_graphics);
 }

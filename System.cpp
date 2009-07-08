@@ -1,6 +1,6 @@
 #include "System.hpp"
 
-void System::initGuileFunctions() {
+void System::initGuile() {
   scm_c_define_gsubr("get-args", 0, 0, 0, (SCM (*)()) scm_get_args);
   scm_c_define_gsubr("quit", 0, 0, 0, (SCM (*)()) scm_quit);
   scm_c_define_gsubr("debug-prompt", 0, 0, 0, (SCM (*)()) scm_debug_prompt);

@@ -1,27 +1,27 @@
 #ifndef LOGMANAGER_HPP
 #define LOGMANAGER_HPP
+
+#include "GGEElement.hpp"
 #include <string>
 #include <fstream>
 #include <iostream>
 #include <libguile.h>
-#include "ScriptManager.hpp"
 
-class LogManager {
-	friend class ScriptManager;
+class LogManager : public GGEElement {
 	private:
-		LogManager(); 
+		int m_iOutputMode;
+		std::string m_sOutputFile;
+		std::ofstream m_oOutputStream;
 
-    static LogManager *get() {
+		LogManager(); 
+		void initGuile();
+
+	public:
+    static LogManager* get() {
       static LogManager instance;
       return &instance;
     }
 
-		static void initGuileFunctions();
-
-		int m_iOutputMode;
-		std::string m_sOutputFile;
-		std::ofstream m_oOutputStream;
-	public:
 		enum {
 			OUTPUT_FILE = 1, 
 			OUTPUT_STDOUT = 2,

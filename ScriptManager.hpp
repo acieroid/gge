@@ -1,14 +1,14 @@
-#ifndef GGE_SCRIPTMANAGER_HPP
-#define GGE_SCRIPTMANAGER_HPP
+#ifndef SCRIPTMANAGER_HPP
+#define SCRIPTMANAGER_HPP
 
+#include "GGEElement.hpp"
 #include <libguile.h>
-#include "LogManager.hpp"
-#include "System.hpp"
-#include "Display.hpp"
+#include <vector>
 
 class ScriptManager {
   private:
-    ScriptManager();
+    std::vector<GGEElement*> m_vElements;
+    ScriptManager() {}
 
     static ScriptManager* get() {
       static ScriptManager instance;
@@ -17,6 +17,8 @@ class ScriptManager {
   public:
 		/* Initialize guile */
 		static void initGuile();
+
+    static void registerElement(GGEElement *e);
 
     /* Load a script */
     static void loadScript(const char *script); 
