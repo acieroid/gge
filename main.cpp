@@ -37,20 +37,10 @@ int main(int argc, char **argv) {
     return 0;
   }
   else {
-
-    std::cout << "Calling " << vm["script"].as< std::string>() 
-              << " with these args : ";
-
-    if (vm.count("args")) {
-      std::vector<std::string> V = vm["args"].as<std::vector<std::string> >(); 
-      for (std::vector<std::string>::iterator I = V.begin(); I != V.end(); I++)
-        std::cout << *I << " ";
-    }
-    std::cout << std::endl;
-    
 		LogManager::setOutputMode(LogManager::OUTPUT_FILE | LogManager::OUTPUT_STDERR);
-		ScriptManager::initGuile();
+    System::setScriptArguments(vm["args"].as<std::vector<std::string> >());
     
+		ScriptManager::initGuile();
     ScriptManager::loadScript(vm["script"].as<std::string>().c_str());
   }
 }

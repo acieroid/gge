@@ -21,12 +21,14 @@ class System {
     static void initGuileFunctions();
 
   public:
-    void setScriptArguments(std::vector<std::string> args);
+    static void setScriptArguments(std::vector<std::string> args);
 
     /* Get the arguments in a list */
     static SCM scm_get_args();
     /* Quit GGE */
     static SCM scm_quit();
+    /* Launch a instance of guile's interpreter */
+    static SCM scm_debug_prompt();
 };
 
 #endif
