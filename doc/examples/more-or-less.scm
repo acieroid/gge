@@ -2,9 +2,9 @@
 ; scheme interpreter.
 ; Though this program can also be executed with `guile -s`, there's no
 ; advantages to use GGE here, but in more sophisticated games you
-; could use GGE functions, for logging, arguments, ... 
+; could use GGE functions, like logging, arguments, ... 
 ; (yes, most of these functions can also be written in scheme, so
-; there's  no real advantages)
+; there's no real advantages)
 
 (define *nb* (random 100))
 

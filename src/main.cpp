@@ -20,7 +20,7 @@ int main(int argc, char **argv) {
       "arguments to the script");
 
   boost::program_options::positional_options_description p;
-  p.add("help", 1).add("script", 2).add("args", -1);
+  p.add("script", 1).add("args", 2);
 
   boost::program_options::variables_map vm;
   try {

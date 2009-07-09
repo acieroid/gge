@@ -1,4 +1,4 @@
-# SConstruct inspired from http://www.scons.org/wiki/UsingPkgConfig
+# inspired from http://www.scons.org/wiki/UsingPkgConfig
 # vim: ft=python
 
 env = Environment()
