@@ -38,6 +38,11 @@ libsStr = ''
 for lib in libsUsed:
   libsStr += ' ' + lib
 env.ParseConfig('pkg-config --cflags --libs' + libsStr)
+
+env.Append(CCFLAGS = ['-O2'])
+if int(ARGUMENTS.get('debug', 0)):
+	env.Append(CCFLAGS = ['-g'])
+
 # boost not in pkg-config
 env.Append(LIBS=['boost_program_options', 'SDL_image'])
 
