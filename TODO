@@ -1,16 +1,16 @@
-  o Arguments de la ligne de commande
-    o Classe System
-    o utilise boost::program_options 
-    o (get-args) retourne la liste des arguments
-  o Chargement de script
-    o Classe ScriptManager
-    o (load-script "foo.scm")
-  o Quitter à tout moment
-    o classe System
-    o (quit)
+  x Arguments de la ligne de commande
+    x Classe System
+    x utilise boost::program_options 
+    x (get-args) retourne la liste des arguments
+  x Chargement de script
+    x Classe ScriptManager
+    x (load-script "foo.scm")
+  x Quitter à tout moment
+    x classe System
+    x (quit)
   o Aide pour l'IO
     o (set-log-file "foo.log")
-    o (log "this message is logged in a log-file")
+    x (log "this message is logged in a log-file")
     o (error "this message is printed in stderr")
   o Gestion de l'affichage
     o (draw-simple-shape 'rectangle '300 200))

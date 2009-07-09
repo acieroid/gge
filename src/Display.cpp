@@ -10,7 +10,6 @@ void Display::initGuile() {
 }
 
 SCM Display::scm_init_graphics(SCM size) {
-  /* TODO: check variables (it segfaults if not checked) */
   SDL_Surface *screen = get()->m_pScreen;
   screen = SDL_SetVideoMode(scm_to_uint(scm_car(size)),
                             scm_to_uint(scm_cadr(size)), 32,
