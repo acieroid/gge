@@ -1,8 +1,9 @@
-# inspired from http://www.scons.org/wiki/UsingPkgConfig
 # vim: ft=python
 
 env = Environment()
 
+# Some definitions :
+# inspired from http://www.scons.org/wiki/UsingPkgConfig
 def CheckPKGConfig(context, version):
      context.Message( 'Checking for pkg-config... ' )
      ret = context.TryAction('pkg-config --atleast-pkgconfig-version=%s' % version)[0]
@@ -15,7 +16,7 @@ def CheckPKG(context, name):
      context.Result( ret )
      return ret
 
-# Configuration:
+# Check libs
 libsUsed = ['guile-1.8', 'sdl']
 
 conf = Configure(env, custom_tests = { 'CheckPKGConfig' : CheckPKGConfig,
@@ -32,19 +33,24 @@ for lib in libsUsed:
 
 env = conf.Finish()
 
-# Now, build:
-
+# Config
 libsStr = ''
 for lib in libsUsed:
   libsStr += ' ' + lib
 env.ParseConfig('pkg-config --cflags --libs' + libsStr)
 
+# boost not in pkg-config
+env.Append(LIBS=['boost_program_options', 'SDL_image'])
+
+# Debug or not
 env.Append(CCFLAGS = ['-O2'])
 if int(ARGUMENTS.get('debug', 0)):
 	env.Append(CCFLAGS = ['-g'])
 
-# boost not in pkg-config
-env.Append(LIBS=['boost_program_options', 'SDL_image'])
+# Cpp Defines (to include features or not)
+# TODO: make easy the way to compile with SDL, ... 
+# (access those variables through the command line
+env.Append(CPPDEFINES=['WITH_GRAPHICS', 'WITH_SDL'])
 
 env.Program(target='gge',
             source = ['main.cpp',

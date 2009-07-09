@@ -4,7 +4,9 @@
 #include "ScriptManager.hpp"
 #include "LogManager.hpp"
 #include "System.hpp"
+#ifdef WITH_GRAPHICS
 #include "Display.hpp"
+#endif
 
 void usage(const char *name);
 
@@ -52,7 +54,9 @@ int main(int argc, char **argv) {
     
     ScriptManager::registerElement(LogManager::get());
     ScriptManager::registerElement(System::get());
+#ifdef WITH_GRAPHICS
     ScriptManager::registerElement(Display::get());
+#endif
 		ScriptManager::initGuile();
     ScriptManager::loadScript(vm["script"].as<std::string>().c_str());
   }

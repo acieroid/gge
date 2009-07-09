@@ -1,24 +1,32 @@
 #ifndef DISPLAY_HPP
 #define DISPLAY_HPP
 
+#ifdef WITH_GRAPHICS
+
 #include "GGEElement.hpp"
 #include <libguile.h>
 #include <iostream>
 
-#define SDL_DEFAULT_FLAGS SDL_HWSURFACE | SDL_DOUBLEBUF
-#include <SDL.h>
-#include <SDL_image.h>
+#ifdef WITH_SDL
+  #define SDL_DEFAULT_FLAGS SDL_HWSURFACE | SDL_DOUBLEBUF
+  #include <SDL.h>
+  #include <SDL_image.h>
+#endif
 
 class Display : public GGEElement{
   private:
+#ifdef WITH_SDL
     SDL_Surface *m_pScreen;
+#endif
 
     Display();
     void initGuile();
 
 		/* Image smob */
 		struct image {
+#ifdef WITH_SDL
 		  SDL_Surface *surface;
+#endif
 		};
 
 		scm_t_bits m_tImageTag;
@@ -38,4 +46,5 @@ class Display : public GGEElement{
     static SCM scm_update_graphics();
 };
 
+#endif
 #endif

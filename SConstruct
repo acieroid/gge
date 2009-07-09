@@ -1,4 +1,4 @@
 # vim: ft=python
 
-SConscript('src/SConscript', build_dir='build', exports={'env':env})
+SConscript('src/SConscript', build_dir='build')
 
