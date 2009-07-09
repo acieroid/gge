@@ -39,7 +39,7 @@ for lib in libsUsed:
   libsStr += ' ' + lib
 env.ParseConfig('pkg-config --cflags --libs' + libsStr)
 # boost not in pkg-config
-env.Append(LIBS=['boost_program_options'])
+env.Append(LIBS=['boost_program_options', 'SDL_image'])
 
 env.Program(target='gge',
             source = ['main.cpp',

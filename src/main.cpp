@@ -47,7 +47,6 @@ int main(int argc, char **argv) {
     return 0;
   }
   else {
-		LogManager::setOutputMode(LogManager::OUTPUT_FILE | LogManager::OUTPUT_STDERR);
     if (vm.count("args"))
       System::setScriptArguments(vm["args"].as<std::vector<std::string> >());
     

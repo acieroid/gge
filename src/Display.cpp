@@ -33,7 +33,7 @@ size_t Display::free_image(SCM image) {
 SCM Display::scm_load_image(SCM file) {
 	SCM smob;
 	struct image *img;
-	img->surface = SDL_LoadBMP(scm_to_locale_string(file));
+	img->surface = IMG_Load(scm_to_locale_string(file));
 
 	SCM_NEWSMOB(smob, get()->m_tImageTag, img);
 	return smob;

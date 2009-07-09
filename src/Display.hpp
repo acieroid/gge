@@ -7,6 +7,7 @@
 
 #define SDL_DEFAULT_FLAGS SDL_HWSURFACE | SDL_DOUBLEBUF
 #include <SDL.h>
+#include <SDL_image.h>
 
 class Display : public GGEElement{
   private:
