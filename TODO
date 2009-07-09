@@ -16,6 +16,7 @@
     o (draw-simple-shape 'rectangle '300 200))
     o (draw-image (load-image "foo.png") '(0 0))
     o (draw-mesh (load-mesh "foo.mesh") '(0 0 0))
+  o Jeux en console simplifiés
   o Gestion des évenements
     o (add-handler 'key-down (lambda (k) (if (eqv k 'esc) (quit))))
 
