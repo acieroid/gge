@@ -21,6 +21,7 @@ class System : public GGEElement {
     }
 
     static void setScriptArguments(std::vector<std::string> args);
+    static void abort();
 
     /* Get the arguments in a list */
     static SCM scm_get_args();

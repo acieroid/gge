@@ -21,9 +21,13 @@ SCM System::scm_get_args() {
   return args;
 }
 
-SCM System::scm_quit() {
+void System::abort() {
   /* Not really clean, but ... */
   exit(0);
+}
+
+SCM System::scm_quit() {
+  System::abort();
 }
 
 SCM System::scm_debug_prompt() {

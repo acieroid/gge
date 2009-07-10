@@ -52,7 +52,8 @@ int main(int argc, char **argv) {
     if (vm.count("args"))
       System::setScriptArguments(vm["args"].as<std::vector<std::string> >());
     
-    ScriptManager::registerElement(LogManager::get());
+    ScriptManager::registerElement(MainLog::get());
+    ScriptManager::registerElement(ErrorLog::get());
     ScriptManager::registerElement(System::get());
 #ifdef WITH_GRAPHICS
     ScriptManager::registerElement(Display::get());

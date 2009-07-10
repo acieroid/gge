@@ -1,7 +1,6 @@
 #include "ScriptManager.hpp"
 
 void ScriptManager::initGuile() {
-  //LogManager::log("Guile initialization");
   scm_init_guile();
   scm_c_define_gsubr("load-script", 1, 0, 0, (SCM (*)()) scm_load_script);
 
@@ -17,7 +16,6 @@ void ScriptManager::registerElement(GGEElement *e) {
 }
 
 void ScriptManager::loadScript(const char *script) {
-  //LogManager::log("Loading script: " + std::string(script));
   scm_c_primitive_load(script);
 } 
 
