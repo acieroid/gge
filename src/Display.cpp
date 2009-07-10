@@ -1,5 +1,6 @@
 #ifdef WITH_GRAPHICS
 #include "Display.hpp"
+#include <cstdio>
 
 Display::Display() {
   m_pScreen = NULL;
@@ -21,38 +22,55 @@ void Display::initGuile() {
 
 SCM Display::mark_image(SCM image) {
 	struct image *img = (struct image *) SCM_SMOB_DATA(image);
-	/* better than calling scm_gc_mark */
-	return (scm_unused_struct *) img->surface; 
-}
-size_t Display::free_image(SCM image) {
 #ifdef WITH_SDL
+	/* better than calling scm_gc_mark */
+	std::cout << "Mark !\n";
+	return (SCM) img->surface; 
+#endif
+}
+
+size_t Display::free_image(SCM image) {
   struct image *img = (struct image *) SCM_SMOB_DATA(image);
+#ifdef WITH_SDL
+	std::cout << "Free !\n";
 	SDL_FreeSurface(img->surface);
 	/*scm_gc_free(img->surface, sizeof(SDL_Surface), "SDL surface");*/
 	scm_gc_free(img, sizeof(struct image), "image");
 #endif
 	return 0;
 }
+
 SCM Display::scm_load_image(SCM file) {
 	SCM smob;
-	struct image *img;
-	img->surface = IMG_Load(scm_to_locale_string(file));
+#ifdef WITH_SDL
+	struct image *img = (struct image *) scm_gc_malloc(sizeof(struct image), "image");
 
+	img->surface = IMG_Load(scm_to_locale_string(file));
+	if (!img->surface) {
+		std::cout << "Error loading image : "
+							<< IMG_GetError() << std::endl;
+	}
+#endif
 	SCM_NEWSMOB(smob, get()->m_tImageTag, img);
 	return smob;
 }
+
 SCM Display::scm_draw_image(SCM image, SCM pos) {
 #ifdef WITH_SDL
 	struct image *img = (struct image *) SCM_SMOB_DATA(image);
 	SDL_Rect p;
 	p.x = scm_to_int(scm_car(pos));
 	p.y = scm_to_int(scm_cadr(pos));
+	printf("%d, %d", img->surface, NULL);
 	SDL_BlitSurface(img->surface, NULL, get()->m_pScreen, &p); 
 #endif
 }
+
 SCM Display::scm_update_graphics() {
 #ifdef WITH_SDL
-		SDL_Flip(get()->m_pScreen);
+  SDL_Flip(get()->m_pScreen);
+	/* Clean the screen for the next update */
+  SDL_FillRect(get()->m_pScreen, NULL, SDL_MapRGB(get()->m_pScreen->format, 0, 0, 0));
 #endif
 }
 
