@@ -1,5 +1,5 @@
-#ifndef GGE_SYSTEM_HPP
-#define GGE_SYSTEM_HPP
+#ifndef SYSTEM_HPP
+#define SYSTEM_HPP
 
 #include "GGEElement.hpp"
 #include <vector>
