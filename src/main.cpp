@@ -6,6 +6,7 @@
 #include "System.hpp"
 #ifdef WITH_GRAPHICS
 #include "Display.hpp"
+#include "MainLoop.hpp"
 #endif
 
 void usage(const char *name);
@@ -57,6 +58,7 @@ int main(int argc, char **argv) {
     ScriptManager::registerElement(System::get());
 #ifdef WITH_GRAPHICS
     ScriptManager::registerElement(Display::get());
+    ScriptManager::registerElement(MainLoop::get());
 #endif
 		ScriptManager::initGuile();
     ScriptManager::loadScript(vm["script"].as<std::string>().c_str());

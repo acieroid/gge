@@ -2,13 +2,13 @@
 #ifndef MAINLOOP_HPP
 #define MAINLOOP_HPP
 
-#include "GGEELement.hpp"
+#include "GGEElement.hpp"
 #include <libguile.h>
 
 #ifdef WITH_SDL
 /* About 60 FPS */
 #define DELAY_BETWEEN_FRAMES 16
-#include <SDL.H>
+#include <SDL.h>
 #endif
 
 class MainLoop : public GGEElement {
@@ -23,7 +23,7 @@ class MainLoop : public GGEElement {
       static MainLoop instance;
       return &instance;
     }
-}
+};
 
 #endif
 #endif

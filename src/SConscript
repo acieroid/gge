@@ -58,4 +58,6 @@ env.Program(target='gge',
                       'GGEElement.cpp',  
                       'System.cpp',
                       'LogManager.cpp',
-                      'Display.cpp'])
+                      'Display.cpp',
+                      'MainLoop.cpp'
+                     ])

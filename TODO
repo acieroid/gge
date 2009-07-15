@@ -11,16 +11,16 @@
   o Aide pour l'IO
     o (set-log-file "foo.log")
     x (log "this message is logged in a log-file")
-    o (error "this message is printed in stderr")
+    x (error "this message is printed in stderr")
   o Gestion de l'affichage
     o (draw-simple-shape 'rectangle '300 200))
-    o (draw-image (load-image "foo.png") '(0 0))
+    x (draw-image (load-image "foo.png") '(0 0))
     o (draw-mesh (load-mesh "foo.mesh") '(0 0 0))
   o Jeux en console simplifiés
   o Gestion des évenements
     o (add-handler 'key-down (lambda (k) (if (eqv k 'esc) (quit))))
 
-  o Boucle principale
+  x Boucle principale
 
 
   o Possiblitée d'utiliser ogre3D, sdl, …

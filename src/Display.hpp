@@ -13,7 +13,7 @@
   #include <SDL_image.h>
 #endif
 
-class Display : public GGEElement{
+class Display : public GGEElement {
   private:
 #ifdef WITH_SDL
     SDL_Surface *m_pScreen;

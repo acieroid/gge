@@ -1,6 +1,5 @@
 #ifdef WITH_GRAPHICS
 #include "Display.hpp"
-#include <cstdio>
 
 Display::Display() {
   m_pScreen = NULL;
@@ -24,7 +23,6 @@ SCM Display::mark_image(SCM image) {
 	struct image *img = (struct image *) SCM_SMOB_DATA(image);
 #ifdef WITH_SDL
 	/* better than calling scm_gc_mark */
-	std::cout << "Mark !\n";
 	return (SCM) img->surface; 
 #endif
 }
@@ -32,7 +30,6 @@ SCM Display::mark_image(SCM image) {
 size_t Display::free_image(SCM image) {
   struct image *img = (struct image *) SCM_SMOB_DATA(image);
 #ifdef WITH_SDL
-	std::cout << "Free !\n";
 	SDL_FreeSurface(img->surface);
 	/*scm_gc_free(img->surface, sizeof(SDL_Surface), "SDL surface");*/
 	scm_gc_free(img, sizeof(struct image), "image");
@@ -47,7 +44,7 @@ SCM Display::scm_load_image(SCM file) {
 
 	img->surface = IMG_Load(scm_to_locale_string(file));
 	if (!img->surface) {
-		std::cout << "Error loading image : "
+		std::cerr << "Error loading image : "
 							<< IMG_GetError() << std::endl;
 	}
 #endif
@@ -61,7 +58,6 @@ SCM Display::scm_draw_image(SCM image, SCM pos) {
 	SDL_Rect p;
 	p.x = scm_to_int(scm_car(pos));
 	p.y = scm_to_int(scm_cadr(pos));
-	printf("%d, %d", img->surface, NULL);
 	SDL_BlitSurface(img->surface, NULL, get()->m_pScreen, &p); 
 #endif
 }
@@ -83,7 +79,7 @@ SCM Display::scm_init_graphics(SCM size) {
                             SDL_DEFAULT_FLAGS);
 	if (screen == NULL) {
 		/* TODO: handle errors like this */
-		std::cout << "Can't init SDL\n";
+		std::cerr << "Can't init SDL\n";
 		exit(0);
 	}
 	get()->m_pScreen = screen;
